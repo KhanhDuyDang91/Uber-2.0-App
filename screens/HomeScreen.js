@@ -5,8 +5,8 @@ import NavOptions from "../components/NavOptions";
 
 const HomeScreen = () => {
   return (
-    <SafeAreaView className="flex-1 bg-white h-full">
-      <View className="p-10">
+    <SafeAreaView className="flex-1 h-full bg-white">
+      <View className="w-full mt-10 ml-4">
         <Image
           style={styles.image}
           source={{
