@@ -8,6 +8,7 @@ import {
 } from "react-native";
 import React from "react";
 import { useNavigation } from "@react-navigation/native";
+import { GOOGLE_MAPS_APIKEY } from "@env";
 
 const data = [
   {
@@ -26,6 +27,7 @@ const data = [
 
 const NavOptions = () => {
   const navigation = useNavigation();
+
   return (
     <FlatList
       data={data}
