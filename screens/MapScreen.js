@@ -2,6 +2,7 @@ import { StyleSheet, Text, View } from "react-native";
 import React from "react";
 
 import Map from "../components/Map";
+import { MapStackNavigator } from "../navigation/StackNavigator";
 
 const MapScreen = () => {
   return (
@@ -10,8 +11,8 @@ const MapScreen = () => {
         <Map />
       </View>
 
-      <View className="h-1/2 bg-orange-400">
-        <Text>Hahahh</Text>
+      <View className="h-1/2 ">
+        <MapStackNavigator />
       </View>
     </View>
   );

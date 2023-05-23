@@ -3,10 +3,12 @@ import { createNativeStackNavigator } from "@react-navigation/native-stack";
 import EatScreen from "../screens/EatScreen";
 import MapScreen from "../screens/MapScreen";
 import HomeScreen from "../screens/HomeScreen";
+import NavigateCard from "../components/NavigateCard";
+import RideOptionsCard from "../components/RideOptionsCard";
 
 const Stack = createNativeStackNavigator();
 
-const StackNavigator = () => {
+const HomeStackNavigator = () => {
   return (
     <Stack.Navigator initialRouteName="HomeScreen">
       <Stack.Screen
@@ -34,4 +36,25 @@ const StackNavigator = () => {
   );
 };
 
-export default StackNavigator;
+const MapStackNavigator = () => {
+  return (
+    <Stack.Navigator initialRouteName="NavigateCard">
+      <Stack.Screen
+        component={NavigateCard}
+        name="NavigateCard"
+        options={{
+          headerShown: false,
+        }}
+      />
+      <Stack.Screen
+        component={RideOptionsCard}
+        name="RideOptionsCard"
+        options={{
+          headerShown: false,
+        }}
+      />
+    </Stack.Navigator>
+  );
+};
+
+export { HomeStackNavigator, MapStackNavigator };
