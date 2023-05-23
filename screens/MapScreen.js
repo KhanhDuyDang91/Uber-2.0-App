@@ -7,7 +7,7 @@ import { MapStackNavigator } from "../navigation/StackNavigator";
 const MapScreen = () => {
   return (
     <View>
-      <View className="h-1/2">
+      <View className="h-1/2 mt-8">
         <Map />
       </View>
 

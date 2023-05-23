@@ -38,7 +38,7 @@ const HomeStackNavigator = () => {
 
 const MapStackNavigator = () => {
   return (
-    <Stack.Navigator initialRouteName="NavigateCard">
+    <Stack.Navigator>
       <Stack.Screen
         component={NavigateCard}
         name="NavigateCard"

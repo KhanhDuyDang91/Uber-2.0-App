@@ -1,5 +1,5 @@
 import { StyleSheet, Text, View, Platform } from "react-native";
-import React from "react";
+import React, { useRef, useEffect } from "react";
 import MapView, { Marker } from "react-native-maps";
 import MapViewDirections from "react-native-maps-directions";
 import { useSelector } from "react-redux";
@@ -10,11 +10,39 @@ import { GOOGLE_MAPS_APIKEY } from "@env";
 const Map = () => {
   const origin = useSelector(selectOrigin);
   const destination = useSelector(selectDestination);
+  const mapRef = useRef(null);
+
+  /* const fitAllMarkers = () => {
+    mapRef.current.fitToCoordinates(
+      [{ latitude: origin.location.lat, longitude: origin.location.lng }],
+      {
+        edgePadding: { top: 30, right: 30, bottom: 30, left: 30 },
+        animated: true,
+      }
+    );
+  }; */
+
+  useEffect(() => {
+    if (!origin || !destination) return;
+
+    //Zoom & fit to markers
+
+    setTimeout(() => {
+      mapRef.current.fitToSuppliedMarkers(
+        ["origin", "destination"],
+        {
+          edgePadding: { top: 30, right: 30, bottom: 30, left: 30 },
+        },
+        true
+      );
+    }, 500);
+  }, [origin, destination]);
 
   return (
     <MapView
+      ref={mapRef}
       className="flex-1"
-      mapType="mutedStandard"
+      mapType="standard"
       initialRegion={{
         latitude: origin.location.lat,
         longitude: origin.location.lng,
@@ -50,7 +78,7 @@ const Map = () => {
             latitude: destination.location.lat,
             longitude: destination.location.lng,
           }}
-          title="destination"
+          title="Destination"
           description={destination.description}
           identifier="destination"
         />
