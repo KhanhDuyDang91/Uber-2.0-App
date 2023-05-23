@@ -1,26 +1,28 @@
 import { StyleSheet, Text, View, SafeAreaView } from "react-native";
 import React from "react";
 import { GooglePlacesAutocomplete } from "react-native-google-places-autocomplete";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { useNavigation } from "@react-navigation/native";
 
 import { GOOGLE_MAPS_APIKEY } from "@env";
-import { setDestination } from "../slices/navSlice";
+import { setDestination, selectDestination } from "../slices/navSlice";
+import NavFavourites from "./NavFavourites";
 
 const NavigateCard = () => {
   const dispatch = useDispatch();
   const navigation = useNavigation();
+  const destination = useSelector(selectDestination);
 
   return (
     <SafeAreaView className="bg-white flex-1">
-      <Text className="text-center py-5 text-xl">
+      <Text className="text-center py-5 text-2xl">
         Where do you want to arrive?
       </Text>
 
       <View className="border-t border-gray-200 flex-shrink">
         <View className="items-center mt-3 ">
           <GooglePlacesAutocomplete
-            placeholder="Where To?"
+            placeholder={!destination ? "Where From?" : destination.description}
             styles={{
               container: {
                 flex: 0,
@@ -57,6 +59,7 @@ const NavigateCard = () => {
           />
         </View>
       </View>
+      <NavFavourites style={{ marginLeft: 10 }} />
     </SafeAreaView>
   );
 };

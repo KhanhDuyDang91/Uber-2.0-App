@@ -8,18 +8,18 @@ import {
 } from "react-native";
 import React from "react";
 import { GooglePlacesAutocomplete } from "react-native-google-places-autocomplete";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 
 import NavOptions from "../components/NavOptions";
 import { GOOGLE_MAPS_APIKEY } from "@env";
-import { setDestination, setOrigin } from "../slices/navSlice";
+import { setDestination, setOrigin, selectOrigin } from "../slices/navSlice";
+import NavFavourites from "../components/NavFavourites";
 
 navigator.geolocation = require("react-native-geolocation-service");
 
-/* const GOOGLE_MAPS_APIKEY = "AIzaSyAqqIS_VUtWIpgMwZh_co-qDoHmiEXyGBc"; */
-
 const HomeScreen = () => {
   const dispatch = useDispatch();
+  const origin = useSelector(selectOrigin);
 
   return (
     <SafeAreaView className="flex-1 h-full bg-white">
@@ -32,7 +32,7 @@ const HomeScreen = () => {
         />
 
         <GooglePlacesAutocomplete
-          placeholder="Where From ?"
+          placeholder={!origin ? "Where From?" : origin.description}
           styles={{
             container: {
               flex: 0,
@@ -68,9 +68,12 @@ const HomeScreen = () => {
           enablePoweredByContainer={false}
           fetchDetails={true}
           keepResultsAfterBlur={true}
+          numberOfLines={1}
         />
 
         <NavOptions />
+        <Text className="text-center py-5 text-2xl -ml-8">Do you mean?</Text>
+        <NavFavourites />
       </View>
     </SafeAreaView>
   );

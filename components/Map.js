@@ -60,6 +60,7 @@ const Map = () => {
         />
       )}
 
+      {/* Display all marker title and description without clicking */}
       {origin?.location && (
         <Marker
           coordinate={{
@@ -69,7 +70,7 @@ const Map = () => {
           title="Origin"
           description={origin.description}
           identifier="origin"
-        />
+        ></Marker>
       )}
 
       {destination?.location && (
